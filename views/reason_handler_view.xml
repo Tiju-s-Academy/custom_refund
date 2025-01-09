@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="reason_handler_view_tree" model="ir.ui.view">
+        <field name="name">reason.handler.view.tree</field>
+        <field name="model">reasons.handler</field>
+        <field name="arch" type="xml">
+            <tree string="Status" editable="bottom">
+                <field name="name"/>
+                <field name="manage_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="reason_handler_action" model="ir.actions.act_window">
+        <field name="name">Status</field>
+        <field name="res_model">reasons.handler</field>
+        <field name="view_mode">tree</field>
+    </record>
+</odoo>

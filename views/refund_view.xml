@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="refund_view_tree" model="ir.ui.view">
+        <field name="name">refund.view.tree</field>
+        <field name="model">refund</field>
+        <field name="arch" type="xml">
+            <tree string="Refund">
+                <field name="fullname"/>
+                <field name="phone"/>
+                <field name="batch"/>
+                <field name="refund_reason"/>
+                <field name="request_date"/>
+                <field name="status_id"/>
+            </tree>
+        </field>
+    </record>
+    <record id="refund_view_form" model="ir.ui.view">
+        <field name="name">refund.view.form</field>
+        <field name="model">refund</field>
+        <field name="arch" type="xml">
+            <form string="Refund" js_class="crm_form">
+                <field name="is_sales_person" invisible="1"/>
+                <header>
+                    <button name="action_submit" type="object" string="Submit" class="oe_highlight"
+                            invisible="state != 'draft'"/>
+                    <button name="action_move_to_verification" type="object" string="Move To Verification" class="oe_highlight"
+                            invisible="state != 'submitted'" groups="custom_refund.officer_refund"/>
+                    <button name="action_verify" type="object" string="Verify" class="oe_highlight"
+                            invisible="state != 'move_to_verification'" groups="custom_refund.accounts_refund"/>
+                    <button name="action_sales_verify" type="object" string="Sales Verification" class="oe_highlight"
+                            invisible="not is_sales_person" groups="custom_refund.sales_refund"/>
+                    <button name="action_partial_approve" type="object" string="Approve" class="oe_highlight"
+                            invisible="state != 'sales_verified'" groups="custom_refund.higher_refund"/>
+                    <button name="action_approve" type="object" string="Approve" class="oe_highlight"
+                            invisible="state != 'in_progress'" groups="custom_refund.admin_refund"/>
+                    <button name="action_paid" type="object" string="Pay" class="oe_highlight"
+                            invisible="state != 'approved'" groups="custom_refund.accounts_refund"/>
+                    <field name="state" widget="statusbar"
+                    statusbar_visible="draft,submitted,move_to_verification,sales_verified,in_progress,approved,paid"/>
+                </header>
+                <sheet>
+                    <widget name="web_ribbon" title="Account Verified" bg_color="text-bg-warning"
+                            invisible="state != 'verified'"/>
+                    <widget name="web_ribbon" title="Sales Verified" bg_color="text-bg-info"
+                            invisible="state != 'sales_verified'"/>
+                    <widget name="web_ribbon" title="Approved" invisible="state != 'approved'"/>
+                    <widget name="web_ribbon" title="Paid" bg_color="text-bg-danger"
+                            invisible="state != 'paid'"/>
+                    <group>
+                        <group>
+                            <field name="fullname" required="1"/>
+                            <field name="admission_no" required="1"/>
+                            <field name="phone" required="1"/>
+                        </group>
+                        <group>
+                            <field name="address"/>
+                            <field name="batch" required="1"/>
+                        </group>
+                        <notebook>
+                            <page name="refund_details" string="Refund Details">
+                                <group>
+                                    <group>
+                                        <field name="refund_reason" required="1"/>
+                                        <field name="status_id" required="1" widget="radio"/>
+                                    </group>
+                                    <group>
+                                        <field name="request_date"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="payment_details" string="Payment Details">
+                                <group>
+                                    <group>
+                                        <field name="payment_date" groups="custom_refund.accounts_refund"
+                                               required="1" invisible="state not in ('approved','paid')"/>
+                                        <field name="payment_method" groups="custom_refund.accounts_refund"
+                                               required="1" invisible="state not in ('approved','paid')"/>
+                                    </group>
+                                    <group>
+                                        <field name="total_amount_paid" groups="custom_refund.accounts_refund"
+                                               required="1" invisible="state not in ('approved','paid')"/>
+                                        <field name="payment_receipts" groups="custom_refund.accounts_refund"
+                                                invisible="state not in ('approved','paid')"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids" options="{'post_refresh': 'recipients'}"/>
+                </div>
+            </form>
+        </field>
+    </record>
+    <record id="refund_action" model="ir.actions.act_window">
+        <field name="name">Refund</field>
+        <field name="res_model">refund</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+</odoo>

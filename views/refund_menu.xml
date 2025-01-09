@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <menuitem id="refund_root_menu"
+              name="Refund"
+              web_icon="custom_refund,static/description/icon.png"/>
+    <menuitem id="refund_menu"
+              name="Refunds"
+              parent="refund_root_menu"
+              action="refund_action"
+              sequence="1"
+              />
+    <menuitem id="refund_eason_menu"
+              name="Reasons"
+              parent="refund_root_menu"
+              action="refund_reason_action"
+              sequence="2"
+              />
+    <menuitem id="reason_handler_menu"
+              name="Status"
+              parent="refund_root_menu"
+              action="reason_handler_action"
+              sequence="3"/>
+</odoo>

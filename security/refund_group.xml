@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="refund_groups" model="ir.module.category">
+        <field name="name">Refund</field>
+        <field name="sequence">302</field>
+        <field name="visible" eval="0"/>
+    </record>
+    <record id="admin_refund" model="res.groups">
+        <field name="name">Admin</field>
+        <field name="category_id" ref="refund_groups"/>
+    </record>
+    <record id="higher_refund" model="res.groups">
+        <field name="name">Vp</field>
+        <field name="category_id" ref="refund_groups"/>
+    </record>
+    <record id="accounts_refund" model="res.groups">
+        <field name="name">Accounts</field>
+        <field name="category_id" ref="refund_groups"/>
+    </record>
+    <record id="sales_refund" model="res.groups">
+        <field name="name">Sales</field>
+        <field name="category_id" ref="refund_groups"/>
+    </record>
+    <record id="officer_refund" model="res.groups">
+        <field name="name">Officer</field>
+        <field name="category_id" ref="refund_groups"/>
+    </record>
+</odoo>

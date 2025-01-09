@@ -1,0 +1,4 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_reasons_handler,reason handler,model_reasons_handler,,1,1,1,1
+access_refund_reason,refund reason,model_refund_reason,,1,1,1,1
+access_refund,refund,model_refund,,1,1,1,1

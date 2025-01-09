@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="refund_thanks_web_form_template">
+        <title>HelpDesk - Thank You</title>
+        <t t-call="website.layout">
+            <t t-javascript="true">
+                <script type="text/javascript">
+                    window.onload = function () {
+                    console.log("working");
+                    // Hide header and footer by their IDs
+                    const topElement = document.getElementById('top');
+                    const footerElement = document.getElementById('footer');
+                    const elements = document.querySelectorAll('.o_footer_copyright.o_colored_level.o_cc');
+                    elements.forEach(element => {
+                    element.style.display = "none";
+                    });
+                    if (topElement) {
+                    topElement.style.display = "none";
+                    }
+                    if (footerElement) {
+                    footerElement.style.display = "none";
+                    }
+                    };
+                </script>
+            </t>
+            <div id="wrap">
+                <br></br>
+                <div class="container head" align="center">
+                    <h2>
+                        <b>Thank You</b>
+                    </h2>
+                </div>
+                <br/>
+            </div>
+        </t>
+    </template>
+    <template id="student_refund_template">
+        <title>Refund</title>
+        <t t-call="website.layout">
+            <t t-javascript="true">
+                <script type="text/javascript">
+                    window.onload = function () {
+                    console.log("working");
+                    // Hide header and footer by their IDs
+                    const topElement = document.getElementById('top');
+                    const footerElement = document.getElementById('footer');
+                    const elements = document.querySelectorAll('.o_footer_copyright.o_colored_level.o_cc');
+                    elements.forEach(element => {
+                    element.style.display = "none";
+                    });
+                    console.log(footerElement);
+                    console.log(topElement);
+                    if (topElement) {
+                    topElement.style.display = "none";
+                    }
+                    if (footerElement) {
+                    footerElement.style.display = "none";
+                    }
+                    };
+                </script>
+            </t>
+            <div id="wrap">
+                <br></br>
+                <div class="container head" align="center">
+                    <h5>
+                        <b>Refund Request Form</b>
+                    </h5>
+                </div>
+                <br></br>
+                <div class="container form-class">
+                    <form action="/student_refund/submit" class="form_validate"
+                          enctype="multipart/form-data"
+                          method="POST">
+                        <input type="hidden" name="csrf_token"
+                               t-att-value="request.csrf_token()"/>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>
+                                    <b>Name</b>
+                                </label>
+                                <input type="text" id="name"
+                                       class="form-control"
+                                       placeholder="Enter Your Name"
+                                       name="fullname" required="1"/>
+                            </div>
+                            <div class="col-6">
+                                <label>
+                                    <b>Admission Number</b>
+                                </label>
+                                <input type="text" id="admission_number"
+                                       class="form-control"
+                                       placeholder="Please Enter Your Admission Number"
+                                       name="admission_number" required="1"/>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>
+                                    <b>Address</b>
+                                </label>
+                                <input type="text" id="address"
+                                       class="form-control"
+                                       placeholder="Enter Your Address"
+                                       name="address" required="1"/>
+                            </div>
+                            <div class="col-6">
+                                <label>
+                                    <b>Phone Number</b>
+                                </label>
+                                <input type="text" id="phone_number"
+                                       class="form-control"
+                                       placeholder="Please Enter Your Phone Number"
+                                       name="phone_number" required="1"/>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>
+                                    <b>Class</b>
+                                </label>
+                                <input type="text" id="class"
+                                       class="form-control"
+                                       placeholder="Enter Your class"
+                                       name="class" required="1"/>
+                            </div>
+                            <div class="col-6">
+                                <label>
+                                    <b>Current Status</b>
+                                </label>
+                                <select name="status_id" class="form-control">
+                                    <option value="" selected="true">Select Your
+                                        Current Status
+                                    </option>
+                                    <t t-foreach="status_id" t-as="cur">
+                                        <option t-att-value="cur.id">
+                                            <t t-esc="cur.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="row">
+                            <div class="col-6">
+                                <label>
+                                    <b>Reason</b>
+                                </label>
+                                <select name="refund_reason" class="form-control">
+                                    <option value="" selected="true">Select Your
+                                        Reason
+                                    </option>
+                                    <t t-foreach="refund_reason" t-as="reason">
+                                        <option t-att-value="reason.id">
+                                            <t t-esc="reason.name"/>
+                                        </option>
+                                    </t>
+                                </select>
+                            </div>
+                        </div>
+                        <br></br>
+                        <div class="form-group col-12 btn-center new_div"
+                             align="center">
+                            <div style="width: 200px;"
+                                 class="s_website_form_label"/>
+                            <button type="submit" class="btn btn-primary submit_btn"
+                                    id="submitbtn">Submit
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>
