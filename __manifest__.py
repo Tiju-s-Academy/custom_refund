@@ -4,6 +4,7 @@
     'summary': 'Refund',
     'depends': ['base', 'web', 'mail'],
     'data': [
+        'data/mail_activity_data.xml',
         'security/refund_group.xml',
         'security/ir.model.access.csv',
         'views/refund_reason_view.xml',

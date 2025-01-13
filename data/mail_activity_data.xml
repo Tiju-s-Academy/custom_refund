@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="mail_activity_refund" model="mail.activity.type">
+            <field name="name">Refund Approval</field>
+            <field name="summary">Refund Follow-up</field>
+            <field name="res_model">refund</field>
+            <field name="delay_count">30</field>
+        </record>
+    </data>
+</odoo>

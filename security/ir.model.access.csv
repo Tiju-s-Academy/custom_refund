@@ -1,4 +1,20 @@
 id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
-access_reasons_handler,reason handler,model_reasons_handler,,1,1,1,1
-access_refund_reason,refund reason,model_refund_reason,,1,1,1,1
-access_refund,refund,model_refund,,1,1,1,1
+access_reasons_handler_admin,reason handler Admin,model_reasons_handler,admin_refund,1,1,1,1
+access_refund_reason_admin,refund reason Admin,model_refund_reason,admin_refund,1,1,1,1
+access_refund_admin,refund Admin,model_refund,admin_refund,1,1,1,1
+
+access_reasons_handler_officers,reason handler officer,model_reasons_handler,officer_refund,1,1,0,0
+access_refund_reason_officers,refund reason officers,model_refund_reason,officer_refund,1,1,0,0
+access_refund_officers,refund ,model_refund,officer_refund,1,1,0,0
+
+access_reasons_handler_sales,reason handler sales,model_reasons_handler,sales_refund,1,1,0,0
+access_refund_reason_sales,refund reason sales,model_refund_reason,sales_refund,1,1,0,0
+access_refund_sales,refund sales,model_refund,sales_refund,1,1,0,0
+
+access_reasons_handler_accounts,reason handler accounts,model_reasons_handler,accounts_refund,1,1,0,0
+access_refund_reason_accounts,refund reason accounts,model_refund_reason,accounts_refund,1,1,0,0
+access_refund_accounts,refund accounts,model_refund,accounts_refund,1,1,0,0
+
+access_reasons_handler_vp,reason handler vp,model_reasons_handler,higher_refund,1,1,0,0
+access_refund_reason_vp,refund reason vp,model_refund_reason,higher_refund,1,1,0,0
+access_refund_vp,refund vp,model_refund,higher_refund,1,1,0,0

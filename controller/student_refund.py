@@ -1,12 +1,12 @@
 from odoo.http import Controller, request, route
+from odoo import http,fields
+from datetime import datetime, timedelta
 
 class StudentRefundController(Controller):
     @route('/student_refund', auth='public', website=True)
     def student_refund(self, **kwargs):
         status_id = request.env['reasons.handler'].sudo().search([])
-        print("status_id: ", status_id)
         refund_reason = request.env['refund.reason'].sudo().search([])
-        print("refund_reason: ", refund_reason)
         values = {
             'status_id': status_id,
             'refund_reason': refund_reason,
@@ -27,7 +27,24 @@ class StudentRefundController(Controller):
             'refund_reason': int(post.get('refund_reason')),
             'state': 'submitted',
         })
-        print(refund)
+        officer_group = request.env.ref('custom_refund.officer_refund')
+
+        # Get all users in the officer group
+        officers = request.env['res.users'].sudo().search([('groups_id', 'in', officer_group.id)])
+
+        # Get the custom mail activity type
+        refund_activity_type = request.env.ref('custom_refund.mail_activity_refund')
+
+        for officer in officers:
+            request.env['mail.activity'].sudo().create({
+                'activity_type_id': refund_activity_type.id,
+                'res_model_id': request.env['ir.model']._get_id('refund'),
+                'res_id': refund.id,  # Link the activity to the refund record
+                'user_id': officer.id,  # Assign to the officer
+                'summary': refund_activity_type.summary,  # Default summary
+                'note': f"A refund request has been submitted by {refund.fullname}. Please review and process.",
+                'date_deadline': fields.Date.today(),
+            })
         return request.redirect('/refund_thanks')
 
     @route('/refund_thanks', auth='public', website=True)

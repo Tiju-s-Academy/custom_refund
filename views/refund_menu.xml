@@ -13,11 +13,13 @@
               name="Reasons"
               parent="refund_root_menu"
               action="refund_reason_action"
+              groups="custom_refund.admin_refund"
               sequence="2"
               />
     <menuitem id="reason_handler_menu"
               name="Status"
               parent="refund_root_menu"
               action="reason_handler_action"
+              groups="custom_refund.admin_refund"
               sequence="3"/>
 </odoo>
