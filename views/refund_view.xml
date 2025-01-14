@@ -11,6 +11,7 @@
                 <field name="refund_reason"/>
                 <field name="request_date"/>
                 <field name="status_id"/>
+                <field name="state" widget="badge" decoration-info="state == 'in_progress'" decoration-danger="state == 'paid'" />
             </tree>
         </field>
     </record>
@@ -23,6 +24,8 @@
                 <header>
                     <button name="action_submit" type="object" string="Submit" class="oe_highlight"
                             invisible="state != 'draft'"/>
+                    <button name="action_cancel" type="object" string="Cancel" class="oe_highlight"
+                            invisible="state not in ('submitted','move_to_verification','verified','sales_verified','in_progress','approved')"/>
                     <button name="action_move_to_verification" type="object" string="Move To Verification" class="oe_highlight"
                             invisible="state != 'submitted'" groups="custom_refund.officer_refund"/>
                     <button name="action_verify" type="object" string="Verify" class="oe_highlight"

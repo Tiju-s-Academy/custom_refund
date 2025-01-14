@@ -143,6 +143,11 @@ class Refund(models.Model):
                 'type': 'rainbow_man',
             }
         }
+    def action_cancel(self):
+        self.write({'state':'canceled'})
+        activity_ids = self.activity_ids
+        if activity_ids:
+            activity_ids.unlink()
 
     @api.depends('state')
     def _compute_is_sales_person(self):
