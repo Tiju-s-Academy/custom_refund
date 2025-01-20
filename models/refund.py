@@ -55,6 +55,11 @@ class Refund(models.Model):
 
     is_sales_person = fields.Boolean(compute='_compute_is_sales_person',strore=True)
 
+    study_mode = fields.Selection([('online', 'Online'), ('offline', 'Offline')], string="Study Mode", tracking=True)
+    student_department = fields.Selection([('mavelikara', 'Mavelikara'), ('thiruvalla', 'Thiruvalla')],
+                                          string="Student Department", tracking=True)
+    team = fields.Selection([('team_a', 'Team A'), ('team_b', 'Team B')], string="Team", tracking=True)
+
     def action_submit(self):
         self.write({'state':'submitted'})
 

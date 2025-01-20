@@ -142,6 +142,42 @@
                             </div>
                         </div>
                         <br></br>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <label for="study_mode">Studies Mode</label>
+                                <select id="study_mode" name="study_mode" class="form-control">
+                                    <option value="">Select Study Mode</option>
+                                    <option value="online">Online</option>
+                                    <option value="offline">Offline</option>
+                                </select>
+                            </div>
+                            <div class="col-6">
+                                <!-- Team field -->
+                                <div id="team_field" style="display: none;">
+                                    <label>
+                                        <b>Team</b>
+                                    </label>
+                                    <select id="team" name="team" class="form-control">
+                                        <option value="">Select Team</option>
+                                        <option value="team_a">Team A</option>
+                                        <option value="team_b">Team B</option>
+                                    </select>
+                                </div>
+                                <!-- Department field -->
+                                <div id="department_field" style="display: none;">
+                                    <label>
+                                        <b>Department</b>
+                                    </label>
+                                    <select id="student_department" name="student_department" class="form-control">
+                                        <option value="">Select Department</option>
+                                        <option value="mavelikara">Mavelikara</option>
+                                        <option value="thiruvalla">Thiruvalla</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <br></br>
                         <div class="row">
                             <div class="col-6">
                                 <label>
@@ -171,6 +207,37 @@
                     </form>
                 </div>
             </div>
+            <t t-javascript="true">
+                <script type="text/javascript">
+                    document.addEventListener('DOMContentLoaded', function () {
+                    // Get the study_mode dropdown and both fields
+                    const studyMode = document.getElementById('study_mode');
+                    const teamField = document.getElementById('team_field');
+                    const departmentField = document.getElementById('department_field');
+
+                    // Function to toggle visibility based on study mode
+                    function toggleFields() {
+                    const value = studyMode.value;
+                    if (value === 'online') {
+                    teamField.style.display = 'block';
+                    departmentField.style.display = 'none';
+                    } else if (value === 'offline') {
+                    teamField.style.display = 'none';
+                    departmentField.style.display = 'block';
+                    } else {
+                    teamField.style.display = 'none';
+                    departmentField.style.display = 'none';
+                    }
+                    }
+
+                    // Attach event listener to study_mode dropdown
+                    studyMode.addEventListener('change', toggleFields);
+
+                    // Initialize visibility on page load
+                    toggleFields();
+                    });
+                </script>
+            </t>
         </t>
     </template>
 </odoo>

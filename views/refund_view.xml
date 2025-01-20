@@ -58,6 +58,9 @@
                         <group>
                             <field name="address"/>
                             <field name="batch" required="1"/>
+                            <field name="study_mode" widget="radio"/>
+                            <field name="student_department" invisible="study_mode !='offline'"/>
+                            <field name="team" invisible="study_mode !='online'"/>
                         </group>
                         <notebook>
                             <page name="refund_details" string="Refund Details">
